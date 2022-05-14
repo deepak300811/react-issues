@@ -28,3 +28,9 @@
     grid-gap: 8px;
   }
 }
+
+@media (max-width:540px){
+  .App{
+    padding: unset;
+  }
+}
