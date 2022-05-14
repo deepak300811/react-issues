@@ -6,9 +6,8 @@ const makeDateString = (created_at) => {
   const daysGap = parseInt(date.subtract(today, createdOn).toDays());
   let dateString;
   if (daysGap === 0) {
-    dateString = `${parseInt(
-      date.subtract(today, createdOn).toHours()
-    )} hours ago`;
+    const hourVal = parseInt(date.subtract(today, createdOn).toHours());
+    dateString = `${hourVal} hour${hourVal !== 1 ? 's' : ''} ago`;
   } else if (daysGap === 1) {
     dateString = `yesterday`;
   } else if (daysGap > 1 && daysGap < 30) {

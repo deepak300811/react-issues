@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 const useGetData = (pageNumber) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [issues, setIssues] = useState([]);
   const [hasMore, setHasMore] = useState(false);
-  let cancel;
+
+  let cancel = useRef(undefined);
   useEffect(() => {
     setLoading(true);
     axios({
       method: 'GET',
       url: 'https://api.github.com/repos/facebook/react/issues',
       params: { page: pageNumber },
-      cancelToken: new axios.CancelToken((c) => (cancel = c)),
+      cancelToken: new axios.CancelToken((c) => (cancel.current = c)),
     })
       .then((res) => {
         setIssues((prev) => [...prev, ...res.data]);
@@ -25,8 +26,8 @@ const useGetData = (pageNumber) => {
         setError(true);
         console.log(error);
       });
-    return () => cancel();
-  }, [pageNumber]);
+    return () => cancel.current();
+  }, [pageNumber, error]);
 
   return { loading, error, issues, hasMore };
 };
