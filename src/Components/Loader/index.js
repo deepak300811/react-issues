@@ -4,7 +4,6 @@ import './style.css';
 const Loader = () => {
   return (
     <div className="skeleton-design">
-      {/* <div className="border-bottom"> */}
       <SkeletonTheme height={30} borderRadius={10}>
         <p className="border-bottom">
           <Skeleton />

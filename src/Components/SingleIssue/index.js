@@ -3,7 +3,7 @@ import { CircleIcon, CommentIcon } from '../../Icons/Icons';
 import makeDateString from '../../util/makeDateString';
 
 const SingleIssue = ({ issue }) => {
-  const { title, id, created_at, labels, user, comments, assignee } = issue;
+  const { title, number, created_at, labels, user, comments, assignee } = issue;
   const labelsArr = labels.map((label) => {
     return {
       labelName: label.name,
@@ -44,7 +44,7 @@ const SingleIssue = ({ issue }) => {
               </span>
             </div>
             <p className="author">
-              #{id} opened {dateString} by {login}
+              #{number} opened {dateString} by {login}
             </p>
           </div>
           <div className="avatar">
